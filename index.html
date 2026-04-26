@@ -1146,6 +1146,407 @@ nav {
   100% { background-position: 400% 50%; }
 }
 
+
+/* ══════════════════════════════════════════════
+   SUBSTACK CYBERPUNK BANNER
+══════════════════════════════════════════════ */
+.substack-section {
+  position: relative;
+  z-index: 1;
+  padding: 120px 80px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0a0018 0%, #0d0020 40%, #080015 100%);
+  border-top: 1px solid rgba(192,38,211,0.3);
+  text-align: center;
+}
+
+/* animated border top */
+.substack-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent, #7c3aed, #c026d3, #e879f9, #a855f7, #7c3aed, #c026d3, transparent
+  );
+  background-size: 400% 100%;
+  animation: substack-top-bar 3s linear infinite;
+}
+
+@keyframes substack-top-bar {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 400% 0%; }
+}
+
+/* bottom border */
+.substack-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent, #e879f9, #a855f7, #7c3aed, #c026d3, #e879f9, transparent
+  );
+  background-size: 400% 100%;
+  animation: substack-top-bar 3s linear infinite reverse;
+}
+
+/* big background glow */
+.substack-bg-glow {
+  position: absolute;
+  width: 900px; height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,85,247,0.12) 0%, rgba(192,38,211,0.06) 40%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: substack-glow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes substack-glow-pulse {
+  0%, 100% { opacity: 0.7; transform: translate(-50%,-50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%,-50%) scale(1.08); }
+}
+
+/* floating particles */
+.substack-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.substack-particles span {
+  position: absolute;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: #e879f9;
+  opacity: 0;
+  animation: substack-particle 6s ease-in-out infinite;
+}
+.substack-particles span:nth-child(1) { left:10%; animation-delay:0s;   background:#a855f7; }
+.substack-particles span:nth-child(2) { left:25%; animation-delay:0.8s; background:#e879f9; }
+.substack-particles span:nth-child(3) { left:40%; animation-delay:1.6s; background:#c026d3; }
+.substack-particles span:nth-child(4) { left:55%; animation-delay:2.4s; background:#a855f7; }
+.substack-particles span:nth-child(5) { left:65%; animation-delay:0.4s; background:#e879f9; }
+.substack-particles span:nth-child(6) { left:75%; animation-delay:1.2s; background:#7c3aed; }
+.substack-particles span:nth-child(7) { left:85%; animation-delay:2.0s; background:#c026d3; }
+.substack-particles span:nth-child(8) { left:92%; animation-delay:3.0s; background:#e879f9; }
+
+@keyframes substack-particle {
+  0%   { opacity:0; transform: translateY(100px) scale(0.5); }
+  20%  { opacity:0.8; }
+  80%  { opacity:0.4; }
+  100% { opacity:0; transform: translateY(-200px) scale(1.2); }
+}
+
+/* inner content */
+.substack-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.substack-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: #c026d3;
+  text-transform: uppercase;
+}
+
+.substack-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #e879f9;
+  box-shadow: 0 0 8px #e879f9;
+  animation: substack-dot-blink 1.4s ease-in-out infinite;
+}
+.substack-dot:last-child { animation-delay: 0.7s; }
+
+@keyframes substack-dot-blink {
+  0%, 100% { opacity:1; box-shadow: 0 0 8px #e879f9; }
+  50%       { opacity:0.2; box-shadow: 0 0 2px #e879f9; }
+}
+
+.substack-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #f0e8ff;
+}
+
+.substack-title-gradient {
+  display: block;
+  background: linear-gradient(90deg, #f0abfc, #e879f9, #a855f7, #7c3aed, #c026d3, #f0abfc);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: substack-title-shift 4s linear infinite;
+  filter: drop-shadow(0 0 24px rgba(232,121,249,0.5));
+}
+
+@keyframes substack-title-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
+
+.substack-desc {
+  font-size: 17px;
+  color: #c4b5d4;
+  line-height: 1.8;
+  max-width: 520px;
+  font-weight: 400;
+}
+
+/* CTA BUTTON */
+.substack-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 40px;
+  border-radius: 12px;
+  text-decoration: none;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a0030, #2d0050);
+  border: 2px solid transparent;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+/* animated border on button */
+.substack-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 2px;
+  background: linear-gradient(90deg,
+    #e879f9, #a855f7, #7c3aed, #c026d3, #e879f9, #a855f7
+  );
+  background-size: 400% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: substack-btn-border 2.5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes substack-btn-border {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
+
+.substack-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 50px rgba(168,85,247,0.35);
+}
+
+.substack-btn-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(232,121,249,0.15), transparent 70%);
+  pointer-events: none;
+}
+
+.substack-btn-icon {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #e879f9;
+  text-shadow: 0 0 12px #e879f9;
+  position: relative;
+  z-index: 1;
+}
+
+.substack-btn-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #f0abfc, #e879f9, #a855f7);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: substack-btn-text-shift 3s linear infinite;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes substack-btn-text-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.substack-url {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: rgba(168,85,247,0.6);
+  letter-spacing: 0.1em;
+  margin-top: -8px;
+}
+
+/* Small substack icon in contact */
+.substack-icon-small {
+  font-family: 'Syne', sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #e879f9, #a855f7) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  border-color: #c026d3 !important;
+  box-shadow: inset 0 0 12px rgba(192,38,211,0.2) !important;
+}
+
+.substack-contact-link:hover .contact-label { color: #e879f9 !important; }
+
+@media (max-width: 900px) {
+  .substack-section { padding: 80px 24px; }
+  .substack-btn { padding: 16px 28px; }
+}
+
+
+/* ══════════════════════════════════════════
+   MOVING CORNER BORDERS — HALF-SIDE, MEETING
+══════════════════════════════════════════ */
+.project-card,
+.pipeline-card {
+  position: relative;
+}
+
+/* Remove old corner spans — replaced by a single ::after overlay */
+.corner { display: none; }
+
+/* Each card gets a pseudo-element border drawn as 4 corner brackets
+   Each arm is exactly 50% of the card side — so TL+TR meet at center-top,
+   TL+BL meet at center-left, etc. */
+.cyber-card::after,
+.pipeline-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 4;
+
+  /* Corner bracket drawn via clip-path + background trick.
+     We use a CSS mask that shows only the 4 corner brackets (each 50% long). */
+  background: transparent;
+
+  /* The four L-brackets as a single border image */
+  --arm: 50%;          /* how far each arm extends = half the side */
+  --t: 2.5px;          /* line thickness */
+  --r: 20px;           /* border-radius match */
+
+  /* Draw using outline + clip trick via box-shadow layers — nope, use border-image */
+  /* Cleanest approach: use a repeating SVG data URI + animation via hue-rotate */
+  border: var(--t) solid transparent;
+  border-image: none;
+
+  /* Use background-clip to paint only corners */
+  background-image:
+    /* top edge — left half */
+    linear-gradient(90deg, var(--c1, #22d3ee), var(--c2, #a855f7)),
+    /* top edge — right half */
+    linear-gradient(270deg, var(--c1, #22d3ee), var(--c2, #a855f7)),
+    /* bottom edge — left half */
+    linear-gradient(90deg, var(--c1, #22d3ee), var(--c2, #a855f7)),
+    /* bottom edge — right half */
+    linear-gradient(270deg, var(--c1, #22d3ee), var(--c2, #a855f7)),
+    /* left edge — top half */
+    linear-gradient(180deg, var(--c1, #22d3ee), var(--c2, #a855f7)),
+    /* left edge — bottom half */
+    linear-gradient(0deg, var(--c1, #22d3ee), var(--c2, #a855f7)),
+    /* right edge — top half */
+    linear-gradient(180deg, var(--c1, #22d3ee), var(--c2, #a855f7)),
+    /* right edge — bottom half */
+    linear-gradient(0deg, var(--c1, #22d3ee), var(--c2, #a855f7));
+
+  background-size:
+    50% var(--t),
+    50% var(--t),
+    50% var(--t),
+    50% var(--t),
+    var(--t) 50%,
+    var(--t) 50%,
+    var(--t) 50%,
+    var(--t) 50%;
+
+  background-position:
+    0% 0%,        /* top-left arm → right */
+    100% 0%,      /* top-right arm ← left */
+    0% 100%,      /* bottom-left arm → right */
+    100% 100%,    /* bottom-right arm ← left */
+    0% 0%,        /* left-top arm ↓ */
+    0% 100%,      /* left-bottom arm ↑ */
+    100% 0%,      /* right-top arm ↓ */
+    100% 100%;    /* right-bottom arm ↑ */
+
+  background-repeat: no-repeat;
+
+  /* hidden by default */
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  animation: none;
+  filter: hue-rotate(0deg) brightness(1.2);
+}
+
+/* ── show & animate only on hover ── */
+.cyber-card:hover::after,
+.pipeline-card:hover::after {
+  opacity: 1;
+  animation: corner-hue 3s linear infinite;
+}
+
+@keyframes corner-hue {
+  0%   { filter: hue-rotate(0deg)   brightness(1.3); }
+  25%  { filter: hue-rotate(90deg)  brightness(1.5); }
+  50%  { filter: hue-rotate(180deg) brightness(1.3); }
+  75%  { filter: hue-rotate(270deg) brightness(1.5); }
+  100% { filter: hue-rotate(360deg) brightness(1.3); }
+}
+
+/* MeetAI — thicker, faster on hover */
+.meetai-card::after { --t: 3px; }
+.meetai-card:hover::after { animation-duration: 2s; filter: brightness(1.6); }
+
+/* Soulmate — pink-violet on hover */
+.soulmate-card::after {
+  background-image:
+    linear-gradient(90deg,  #e879f9, #a855f7),
+    linear-gradient(270deg, #e879f9, #a855f7),
+    linear-gradient(90deg,  #c026d3, #7c3aed),
+    linear-gradient(270deg, #c026d3, #7c3aed),
+    linear-gradient(180deg, #e879f9, #a855f7),
+    linear-gradient(0deg,   #c026d3, #7c3aed),
+    linear-gradient(180deg, #e879f9, #a855f7),
+    linear-gradient(0deg,   #c026d3, #7c3aed);
+  background-size:
+    50% 2.5px, 50% 2.5px, 50% 2.5px, 50% 2.5px,
+    2.5px 50%, 2.5px 50%, 2.5px 50%, 2.5px 50%;
+}
+.soulmate-card:hover::after {
+  animation: soulmate-corner-pulse 1.8s ease-in-out infinite;
+  filter: brightness(1.5) saturate(1.6);
+}
+
+@keyframes soulmate-corner-pulse {
+  0%,100% { filter: brightness(1.4) saturate(1.5); }
+  50%     { filter: brightness(1.9) saturate(2.0); }
+}
+
+/* Pipeline cards */
+.pipeline-card:not(.soulmate-card)::after { --t: 2px; }
+.pipeline-card:not(.soulmate-card):hover::after { animation-duration: 4s; }
+
 </style>
 </head>
 <body>
@@ -1177,7 +1578,7 @@ nav {
     
     <div class="hero-title">
       AI in Healthcare · AI Doctor Brand<br>
-      Medical Doctor · AI Builder · Researcher
+      Medical Doctor · AI Builder · Researcher · Personalized AI
     </div>
     
     <p class="hero-bio">
@@ -1257,6 +1658,8 @@ nav {
   <div class="projects-grid">
 
     <div class="project-card meetai-card">
+     
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span> <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
       <div class="meetai-light-bar"></div>
       <div class="project-num" style="color:var(--cyan);opacity:1;">/01 — FLAGSHIP</div>
       <div class="meetai-name">MeetAI</div>
@@ -1269,7 +1672,8 @@ nav {
     </div>
 
         <div class="project-card cyber-card " >
-      <div class="cyber-light-bar"></div>
+      
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span><div class="cyber-light-bar"></div>
       <div class="project-num" style="color:var(--cyan);opacity:1;letter-spacing:0.2em;">/02</div>
       <div class="cyber-card-name" >X-RAY Analyser</div>
       <div class="cyber-card-desc">Local chest X-ray analyzer using Google's MedGemma 1.5 — clinical-grade AI diagnostics with no cloud required.</div>
@@ -1277,7 +1681,8 @@ nav {
     </div>
 
         <div class="project-card cyber-card " >
-      <div class="cyber-light-bar"></div>
+      
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span><div class="cyber-light-bar"></div>
       <div class="project-num" style="color:var(--cyan);opacity:1;letter-spacing:0.2em;">/03</div>
       <div class="cyber-card-name" >DRG-Direct</div>
       <div class="cyber-card-desc">Live MS-DRG grouper pulling directly from CMS for real-time Medicare Severity DRG code assignment (FY2026 v43.0).</div>
@@ -1285,7 +1690,8 @@ nav {
     </div>
 
         <div class="project-card cyber-card " >
-      <div class="cyber-light-bar"></div>
+      
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span><div class="cyber-light-bar"></div>
       <div class="project-num" style="color:var(--cyan);opacity:1;letter-spacing:0.2em;">/04</div>
       <div class="cyber-card-name" >Post-Surgical Recovery Assistant</div>
       <div class="cyber-card-desc">Free, open-source AI assistant for post-surgical recovery guidance — runs on local LLM via Ollama, no cloud patient data exposure.</div>
@@ -1293,7 +1699,8 @@ nav {
     </div>
 
         <div class="project-card cyber-card " >
-      <div class="cyber-light-bar"></div>
+      
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span><div class="cyber-light-bar"></div>
       <div class="project-num" style="color:var(--cyan);opacity:1;letter-spacing:0.2em;">/05</div>
       <div class="cyber-card-name" >Triage-Agent-AI</div>
       <div class="cyber-card-desc">Free, open-source offline AI triage assistant for healthcare front-desk intake — runs on local CPU via Ollama, no patient data leaves the premises.</div>
@@ -1301,7 +1708,8 @@ nav {
     </div>
 
         <div class="project-card cyber-card " >
-      <div class="cyber-light-bar"></div>
+      
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span><div class="cyber-light-bar"></div>
       <div class="project-num" style="color:var(--cyan);opacity:1;letter-spacing:0.2em;">/06</div>
       <div class="cyber-card-name" >Dr-Farooq-Trading-App</div>
       <div class="cyber-card-desc">Fully open-source algorithmic trading dashboard with 200-SMA crossover strategy — runs locally on CPU with no paid data feeds or cloud services.</div>
@@ -1309,7 +1717,8 @@ nav {
     </div>
 
         <div class="project-card cyber-card " >
-      <div class="cyber-light-bar"></div>
+      
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span><div class="cyber-light-bar"></div>
       <div class="project-num" style="color:var(--cyan);opacity:1;letter-spacing:0.2em;">/07</div>
       <div class="cyber-card-name" >Bitcoin Price Predictor</div>
       <div class="cyber-card-desc">Free, open-source real-time Bitcoin price predictor — AI inference runs locally on CPU via Ollama, no paid data or cloud APIs.</div>
@@ -1317,7 +1726,8 @@ nav {
     </div>
 
         <div class="project-card cyber-card " >
-      <div class="cyber-light-bar"></div>
+      
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span><div class="cyber-light-bar"></div>
       <div class="project-num" style="color:var(--cyan);opacity:1;letter-spacing:0.2em;">/08</div>
       <div class="cyber-card-name" >Text-To-Speech Converter</div>
       <div class="cyber-card-desc">Free, open-source offline TTS powered by Qwen3-TTS 0.6B — runs entirely on CPU, no cloud TTS API costs.</div>
@@ -1325,7 +1735,8 @@ nav {
     </div>
 
         <div class="project-card cyber-card " >
-      <div class="cyber-light-bar"></div>
+      
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span><div class="cyber-light-bar"></div>
       <div class="project-num" style="color:var(--cyan);opacity:1;letter-spacing:0.2em;">/09</div>
       <div class="cyber-card-name" >millionaireCoach</div>
       <div class="cyber-card-desc">Open-source AI coach generating personalized wealth-building roadmaps — runs on local LLM via Ollama, no API costs.</div>
@@ -1333,6 +1744,8 @@ nav {
     </div>
 
     <div class="project-card cyber-card">
+     
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span> <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
       <div class="cyber-light-bar"></div>
       <div class="project-num" style="color:var(--cyan);opacity:1;letter-spacing:0.2em;">/10</div>
       <div class="cyber-card-name">Mee&Yoo: Encrypted Chat</div>
@@ -1356,6 +1769,8 @@ nav {
     <div class="pipeline-grid">
 
       <div class="pipeline-card soulmate-card">
+     
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span> <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
         <div class="soulmate-light-bar"></div>
         <div class="pipeline-name soulmate-name">Ai-Soulmate</div>
         <div class="pipeline-desc" style="font-size:15px;color:#e2c6ff;line-height:1.7;position:relative;z-index:1;">A unique <span style="color:#f0abfc;font-weight:700;font-family:'Space Mono',monospace;">personal intelligence</span> project of its kind</div>
@@ -1367,11 +1782,15 @@ nav {
       </div>
 
       <div class="pipeline-card">
+     
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span> <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
         <div class="pipeline-name">Hafiz-Assistant</div>
         <div class="pipeline-desc">Unique Quranic memorization revision solution</div>
       </div>
 
       <div class="pipeline-card">
+     
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span> <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
         <div class="pipeline-name">Hospital-Data-Analyst</div>
         <div class="pipeline-desc">First of its kind Voice Responsive Data Analyst based on OpenClaw</div>
       </div>
@@ -1504,11 +1923,11 @@ nav {
           <div class="contact-value">github.com/DrFarooqAi</div>
         </div>
       </a>
-      <a href="https://substack.com/@drfarooq" target="_blank" class="contact-item">
-        <div class="contact-icon" style="font-size:13px;font-weight:700;color:var(--gold);font-family:'Syne',sans-serif;">S</div>
+      <a href="https://substack.com/@drfarooq" target="_blank" class="contact-item substack-contact-link">
+        <div class="contact-icon substack-icon-small">S</div>
         <div>
-          <div class="contact-label">Substack</div>
-          <div class="contact-value">substack.com/@drfarooq</div>
+          <div class="contact-label" style="color:#c026d3;">Substack</div>
+          <div class="contact-value" style="color:#e879f9;">substack.com/@drfarooq</div>
         </div>
       </a>
     </div>
@@ -1536,6 +1955,31 @@ nav {
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- SUBSTACK CYBERPUNK BANNER -->
+<section class="substack-section">
+  <div class="substack-bg-glow"></div>
+  <div class="substack-particles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="substack-inner">
+    <div class="substack-eyebrow">
+      <span class="substack-dot"></span>
+      PUBLISHED ON SUBSTACK
+      <span class="substack-dot"></span>
+    </div>
+    <div class="substack-title">Read My<br><span class="substack-title-gradient">AI Insights</span></div>
+    <p class="substack-desc">Deep dives on AI in Healthcare, emerging tools, and the future of medicine — written for practitioners, not theorists.</p>
+    <a href="https://substack.com/@drfarooq" target="_blank" class="substack-btn">
+      <span class="substack-btn-glow"></span>
+      <span class="substack-btn-icon">S</span>
+      <span class="substack-btn-text">Open Substack →</span>
+    </a>
+    <div class="substack-url">substack.com/@drfarooq</div>
   </div>
 </section>
 
