@@ -140,17 +140,26 @@ body::after {
 }
 
 .hero-name .line1 {
-  background: linear-gradient(90deg, #e879a0 0%, #f472b6 35%, #fb923c 70%, #f59e0b 100%);
+  background: linear-gradient(90deg, #e879a0, #f472b6, #fb923c, #f59e0b, #f472b6, #e879a0);
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: hero-name-shift 4s linear infinite;
+  filter: drop-shadow(0 0 12px rgba(248,114,162,0.5));
 }
 .hero-name .line2 {
-  background: linear-gradient(90deg, #22d3ee 0%, #06b6d4 40%, #818cf8 80%, #a78bfa 100%);
+  background: linear-gradient(90deg, #22d3ee, #818cf8, #a78bfa, #22d3ee, #818cf8, #22d3ee);
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 16px rgba(34,211,238,0.7)) drop-shadow(0 0 32px rgba(129,140,248,0.4));
+  animation: hero-name-shift 4s linear infinite;
+  filter: drop-shadow(0 0 16px rgba(34,211,238,0.6));
+}
+@keyframes hero-name-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
 }
 
 .hero-title {
