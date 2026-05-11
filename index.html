@@ -1164,6 +1164,92 @@ nav {
   100% { background-position: 400% 50%; }
 }
 
+/* ══════════════════════════════════════════════
+   DATAEXTREME — lime-amber cyberpunk
+══════════════════════════════════════════════ */
+.dataextreme-card {
+  background: linear-gradient(135deg, #04080f 0%, #080d18 50%, #04080f 100%) !important;
+  border: 2px dashed transparent !important;
+}
+
+.dataextreme-card::after {
+  content: 'IN PROGRESS';
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  color: #C8F135;
+  letter-spacing: 0.1em;
+  border: 1px solid #C8F135;
+  padding: 2px 6px;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.dataextreme-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(90deg,
+    #C8F135, #FFB300, #C8F135, #a8d020, #FFB300, #C8F135, #FFB300
+  );
+  background-size: 500% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: de-border-flow 3.5s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes de-border-flow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 500% 50%; }
+}
+
+.dataextreme-light-bar {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(200,241,53,0.08), transparent);
+  animation: de-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes de-sweep {
+  0%   { left: -60%; }
+  100% { left: 130%; }
+}
+
+.dataextreme-name {
+  font-family: 'Syne', sans-serif !important;
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
+  margin: 10px 0 14px !important;
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(90deg, #C8F135, #FFB300, #C8F135, #a8d020, #FFB300, #C8F135) !important;
+  background-size: 400% 100% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: de-text-shift 4s linear infinite !important;
+  filter: drop-shadow(0 0 14px rgba(200,241,53,0.5)) !important;
+}
+
+@keyframes de-text-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
+
 
 /* ══════════════════════════════════════════════
    SUBSTACK CYBERPUNK BANNER
@@ -1824,8 +1910,23 @@ nav {
     
     <div class="pipeline-grid">
 
+      <div class="pipeline-card dataextreme-card">
+      <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span> <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
+        <div class="dataextreme-light-bar"></div>
+        <div class="pipeline-name dataextreme-name">DataExtreme</div>
+        <div class="pipeline-desc" style="font-size:15px;color:#d4e89a;line-height:1.7;position:relative;z-index:1;">An <span style="color:#C8F135;font-weight:700;font-family:'Space Mono',monospace;">autonomous intelligence</span> platform that converts any data to actionable decisions in seconds</div>
+        <div style="margin-top:16px;display:flex;gap:8px;position:relative;z-index:1;flex-wrap:wrap;">
+          <span style="border:1px solid #C8F135;color:#C8F135;background:rgba(200,241,53,0.1);padding:3px 10px;border-radius:4px;font-family:'Space Mono',monospace;font-size:10px;">AI Analytics</span>
+          <span style="border:1px solid #FFB300;color:#FFB300;background:rgba(255,179,0,0.1);padding:3px 10px;border-radius:4px;font-family:'Space Mono',monospace;font-size:10px;">No-Code</span>
+          <span style="border:1px solid #C8F135;color:#C8F135;background:rgba(200,241,53,0.1);padding:3px 10px;border-radius:4px;font-family:'Space Mono',monospace;font-size:10px;">100+ Sources</span>
+        </div>
+        <div style="margin-top:20px;position:relative;z-index:1;">
+          <a href="https://drfarooqai.github.io/articles/ai/DataExtreme.html" target="_blank" style="color:#C8F135;font-family:'Space Mono',monospace;font-size:11px;text-decoration:none;border-bottom:1px solid rgba(200,241,53,0.4);">Explore Platform →</a>
+        </div>
+      </div>
+
       <div class="pipeline-card soulmate-card">
-     
+
       <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span> <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
         <div class="soulmate-light-bar"></div>
         <div class="pipeline-name soulmate-name">Ai-Soulmate</div>
