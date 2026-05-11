@@ -1537,6 +1537,154 @@ nav {
   .substack-btn { padding: 16px 28px; }
 }
 
+/* ══════════════════════════════════════════
+   LINKEDIN NEWSLETTERS SECTION
+══════════════════════════════════════════ */
+.newsletters-section {
+  padding: 80px 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.newsletters-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: #0A66C2;
+  text-align: center;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.newsletters-eyebrow::before,
+.newsletters-eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: #0A66C2;
+  opacity: 0.5;
+}
+.newsletters-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.newsletters-title span { color: #0A66C2; }
+.newsletters-sub {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 48px;
+}
+.newsletters-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.nl-card {
+  position: relative;
+  background: linear-gradient(145deg, #0a0f1e, #0d1528);
+  border: 1px solid rgba(10,102,194,0.25);
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.nl-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, #0A66C2, #378fe9, #0A66C2);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: nl-border-shift 4s linear infinite;
+  pointer-events: none;
+}
+@keyframes nl-border-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+.nl-card:hover::before { opacity: 1; }
+.nl-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(10,102,194,0.55);
+  box-shadow: 0 12px 40px rgba(10,102,194,0.15);
+}
+.nl-platform {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: #378fe9;
+  letter-spacing: 0.1em;
+}
+.nl-platform-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0A66C2;
+  box-shadow: 0 0 8px #0A66C2;
+  animation: nl-dot-pulse 2s ease-in-out infinite;
+}
+@keyframes nl-dot-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+.nl-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+}
+.nl-subs {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nl-subs strong {
+  color: #378fe9;
+  font-size: 13px;
+}
+.nl-arrow {
+  margin-top: auto;
+  font-size: 12px;
+  color: #0A66C2;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s;
+}
+.nl-card:hover .nl-arrow { gap: 10px; }
+@media (max-width: 720px) {
+  .newsletters-grid { grid-template-columns: 1fr; }
+  .newsletters-section { padding: 60px 24px; }
+}
 
 /* ══════════════════════════════════════════
    MOVING CORNER BORDERS — HALF-SIDE, MEETING
@@ -2032,6 +2180,37 @@ nav {
       </a>
     </div>
     <div class="substack-url">substack.com/@drfarooq</div>
+  </div>
+</section>
+
+<!-- LINKEDIN NEWSLETTERS -->
+<section class="newsletters-section">
+  <div class="newsletters-eyebrow">LINKEDIN NEWSLETTERS</div>
+  <div class="newsletters-title">Read My <span>Exclusive Newsletters</span></div>
+  <p class="newsletters-sub">In-depth analysis on AI, data, and healthcare — straight to your LinkedIn feed.</p>
+  <div class="newsletters-grid">
+
+    <a href="https://www.linkedin.com/newsletters/top-5-ai-research-papers-7428156513812279296/" target="_blank" class="nl-card">
+      <div class="nl-platform"><span class="nl-platform-dot"></span>LINKEDIN NEWSLETTER</div>
+      <div class="nl-name">Top 5 AI Research Papers</div>
+      <div class="nl-subs"><strong>504</strong> subscribers</div>
+      <div class="nl-arrow">Subscribe → </div>
+    </a>
+
+    <a href="https://www.linkedin.com/newsletters/data-analytics-for-restaurant-7417587819591823362/" target="_blank" class="nl-card">
+      <div class="nl-platform"><span class="nl-platform-dot"></span>LINKEDIN NEWSLETTER</div>
+      <div class="nl-name">Data Analytics for Restaurant</div>
+      <div class="nl-subs"><strong>439</strong> subscribers</div>
+      <div class="nl-arrow">Subscribe → </div>
+    </a>
+
+    <a href="https://www.linkedin.com/newsletters/data-analysis-untold-stories-7408897131140321280/" target="_blank" class="nl-card">
+      <div class="nl-platform"><span class="nl-platform-dot"></span>LINKEDIN NEWSLETTER</div>
+      <div class="nl-name">Data Analysis: Untold Stories</div>
+      <div class="nl-subs"><strong>561</strong> subscribers</div>
+      <div class="nl-arrow">Subscribe → </div>
+    </a>
+
   </div>
 </section>
 
