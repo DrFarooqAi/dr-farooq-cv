@@ -976,6 +976,247 @@ section:nth-child(even) {
   .trainings-grid { grid-template-columns: 1fr; }
 }
 
+/* PHYSICIAN GROWTH ADVISOR */
+#pga {
+  position: relative;
+  z-index: 1;
+  padding: 0 80px 100px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.pga-header {
+  position: relative;
+  background: linear-gradient(135deg, rgba(168,85,247,0.08), rgba(232,121,249,0.06), rgba(168,85,247,0.04));
+  border: 1px solid rgba(168,85,247,0.28);
+  border-radius: 24px;
+  padding: 56px 60px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  text-align: center;
+}
+.pga-header::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #a855f7, #e879f9, #818cf8, #a855f7);
+  background-size: 300% 100%;
+  animation: th-shimmer 4s linear infinite;
+  border-radius: 24px 24px 0 0;
+}
+.pga-header::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(168,85,247,0.3), transparent);
+}
+
+.pga-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: #c084fc;
+  margin-bottom: 20px;
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.pga-eyebrow::before, .pga-eyebrow::after {
+  content: ''; width: 32px; height: 1px;
+}
+.pga-eyebrow::before { background: linear-gradient(90deg, transparent, #a855f7); }
+.pga-eyebrow::after  { background: linear-gradient(90deg, #a855f7, transparent); }
+
+.pga-main-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.pga-main-title span {
+  background: linear-gradient(90deg, #a855f7, #e879f9, #818cf8);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: th-shimmer 4s linear infinite;
+}
+
+.pga-main-desc {
+  font-size: 17px; color: var(--text-muted);
+  max-width: 560px; margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* PGA body layout */
+.pga-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Landing page featured card */
+.pga-landing-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(168,85,247,0.10), rgba(232,121,249,0.06));
+  border: 1px solid rgba(168,85,247,0.30);
+  border-radius: 18px;
+  padding: 44px 36px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.pga-landing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 56px rgba(168,85,247,0.18);
+}
+.pga-landing-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, #a855f7, #e879f9, #818cf8);
+  background-size: 200% 100%;
+  animation: th-shimmer 4s linear infinite;
+  border-radius: 18px 18px 0 0;
+}
+.pga-landing-card::after {
+  content: '';
+  position: absolute; left: 0; top: -100%; width: 2px; height: 200%;
+  background: linear-gradient(180deg, transparent, #a855f7, transparent);
+  animation: tr-slide 3s linear infinite;
+}
+
+.pga-landing-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c084fc;
+  border: 1px solid rgba(168,85,247,0.35);
+  background: rgba(168,85,247,0.10);
+  padding: 4px 12px; border-radius: 4px;
+  display: inline-block; margin-bottom: 24px;
+  width: fit-content;
+}
+
+.pga-landing-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px; font-weight: 800;
+  color: var(--text); line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.pga-landing-desc {
+  font-size: 15px; color: var(--text-muted);
+  line-height: 1.7; flex: 1;
+  margin-bottom: 32px;
+}
+
+.pga-landing-cta {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+  color: #c084fc;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: letter-spacing 0.2s, color 0.2s;
+}
+.pga-landing-card:hover .pga-landing-cta {
+  letter-spacing: 0.15em;
+  color: #e879f9;
+}
+
+/* Articles series card */
+.pga-series-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 36px 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.pga-series-card::before {
+  content: '';
+  position: absolute; right: 0; top: -100%; width: 2px; height: 200%;
+  background: linear-gradient(180deg, transparent, #e879f9, transparent);
+  animation: tr-slide 3s linear infinite;
+  animation-delay: 1.5s;
+}
+
+.pga-series-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: #c084fc;
+  margin-bottom: 8px;
+}
+
+.pga-series-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--text); margin-bottom: 8px;
+}
+
+.pga-series-desc {
+  font-size: 14px; color: var(--text-muted);
+  line-height: 1.65; margin-bottom: 24px;
+}
+
+.pga-articles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.pga-article-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.pga-article-item:hover {
+  background: rgba(168,85,247,0.08);
+  border-color: rgba(168,85,247,0.30);
+}
+.pga-article-item.coming-soon {
+  opacity: 0.38;
+  pointer-events: none;
+  cursor: default;
+}
+
+.pga-art-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  color: #a855f7; letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+.pga-art-title {
+  font-size: 13px; color: var(--text-dim);
+  flex: 1; line-height: 1.3;
+}
+.pga-article-item:hover .pga-art-title { color: var(--text); }
+.pga-art-arrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: #a855f7;
+  flex-shrink: 0;
+}
+.pga-art-soon {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 2px 7px; border-radius: 3px;
+}
+
+@media (max-width: 900px) {
+  #pga { padding: 0 24px 80px; }
+  .pga-header { padding: 36px 28px; }
+  .pga-body { grid-template-columns: 1fr; }
+}
+
 /* FOOTER */
 footer {
   position: relative;
@@ -2044,6 +2285,7 @@ nav {
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#trainings" style="color:var(--cyan);font-weight:700;">Trainings</a></li>
+    <li><a href="#pga" style="color:#c084fc;font-weight:700;">PGA</a></li>
   </ul>
 </nav>
 
@@ -2655,6 +2897,59 @@ nav {
           <span class="tr-series-title">The Complete Handbook of RAG</span>
           <span class="tr-series-arrow">→</span>
         </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHYSICIAN GROWTH ADVISOR -->
+<section id="pga">
+
+  <!-- Section header -->
+  <div class="pga-header">
+    <div class="pga-eyebrow">New Initiative</div>
+    <h2 class="pga-main-title">
+      Physician<br><span>Growth Advisor</span>
+    </h2>
+    <p class="pga-main-desc">
+      Helping physicians grow their practice, personal brand, and income through AI — articles, frameworks, and a dedicated advisory platform built for the modern clinician.
+    </p>
+  </div>
+
+  <div class="pga-body">
+
+    <!-- Landing page card -->
+    <a href="https://www.linkedin.com/in/dr-muhammadfarooq/" target="_blank" class="pga-landing-card">
+      <div class="pga-landing-badge">★ Landing Page</div>
+      <div class="pga-landing-title">Physician Growth Advisor — The Platform</div>
+      <p class="pga-landing-desc">
+        A dedicated space for physicians who want to build beyond the clinic — personal brand strategy, AI tools for practice growth, and frameworks built specifically for the healthcare professional.
+      </p>
+      <div class="pga-landing-cta">Visit Platform →</div>
+    </a>
+
+    <!-- Articles series -->
+    <div class="pga-series-card">
+      <div class="pga-series-label">Article Series</div>
+      <div class="pga-series-title">Physician Growth — Deep Dives</div>
+      <p class="pga-series-desc">A growing collection of long-form articles on physician branding, AI-driven practice growth, and building influence in the medical space.</p>
+      <div class="pga-articles-list">
+        <div class="pga-article-item coming-soon">
+          <span class="pga-art-num">01</span>
+          <span class="pga-art-title">Article coming soon</span>
+          <span class="pga-art-soon">SOON</span>
+        </div>
+        <div class="pga-article-item coming-soon">
+          <span class="pga-art-num">02</span>
+          <span class="pga-art-title">Article coming soon</span>
+          <span class="pga-art-soon">SOON</span>
+        </div>
+        <div class="pga-article-item coming-soon">
+          <span class="pga-art-num">03</span>
+          <span class="pga-art-title">Article coming soon</span>
+          <span class="pga-art-soon">SOON</span>
+        </div>
       </div>
     </div>
 
