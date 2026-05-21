@@ -764,6 +764,180 @@ section:nth-child(even) {
   color: var(--text);
 }
 
+/* TRAININGS */
+#trainings {
+  position: relative;
+  z-index: 1;
+  padding: 100px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.trainings-header {
+  position: relative;
+  background: linear-gradient(135deg, rgba(34,211,238,0.06), rgba(168,85,247,0.08), rgba(34,211,238,0.04));
+  border: 1px solid rgba(34,211,238,0.25);
+  border-radius: 24px;
+  padding: 56px 60px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  text-align: center;
+}
+.trainings-header::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #22d3ee, #a855f7, #e879f9, #22d3ee);
+  background-size: 300% 100%;
+  animation: th-shimmer 4s linear infinite;
+  border-radius: 24px 24px 0 0;
+}
+.trainings-header::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34,211,238,0.3), transparent);
+}
+@keyframes th-shimmer {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 300% 0%; }
+}
+.trainings-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--cyan);
+  margin-bottom: 20px;
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.trainings-eyebrow::before, .trainings-eyebrow::after {
+  content: ''; width: 32px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan));
+}
+.trainings-eyebrow::after { background: linear-gradient(90deg, var(--cyan), transparent); }
+
+.trainings-main-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.trainings-main-title span {
+  background: linear-gradient(90deg, #22d3ee, #a855f7, #e879f9);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: th-shimmer 4s linear infinite;
+}
+.trainings-main-desc {
+  font-size: 17px; color: var(--text-muted);
+  max-width: 560px; margin: 0 auto;
+  line-height: 1.75;
+}
+
+/* Training cards grid */
+.trainings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.training-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 36px 30px 32px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.training-card:hover {
+  background: var(--surface2);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+}
+
+/* Running side borders */
+.training-card::before,
+.training-card::after {
+  content: '';
+  position: absolute;
+  width: 2px; height: 200%;
+  animation: tr-slide 2.8s linear infinite;
+}
+.training-card::before { left: 0; top: -100%; }
+.training-card::after  { right: 0; top: -100%; animation-delay: 1.4s; }
+
+@keyframes tr-slide {
+  0%   { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* Card 1 — cyan / indigo */
+.training-card-1::before { background: linear-gradient(180deg, transparent, #22d3ee, transparent); }
+.training-card-1::after  { background: linear-gradient(180deg, transparent, #818cf8, transparent); }
+.training-card-1 .tr-top { background: linear-gradient(90deg, #22d3ee, #818cf8); }
+.training-card-1 .tr-cat { color: #22d3ee; }
+.training-card-1:hover { box-shadow: 0 16px 48px rgba(34,211,238,0.10); }
+
+/* Card 2 — pink / purple */
+.training-card-2::before { background: linear-gradient(180deg, transparent, #e879f9, transparent); }
+.training-card-2::after  { background: linear-gradient(180deg, transparent, #a855f7, transparent); }
+.training-card-2 .tr-top { background: linear-gradient(90deg, #e879f9, #a855f7); }
+.training-card-2 .tr-cat { color: #e879f9; }
+.training-card-2:hover { box-shadow: 0 16px 48px rgba(168,85,247,0.12); }
+
+/* Card 3 — gold / cyan */
+.training-card-3::before { background: linear-gradient(180deg, transparent, #f59e0b, transparent); }
+.training-card-3::after  { background: linear-gradient(180deg, transparent, #22d3ee, transparent); }
+.training-card-3 .tr-top { background: linear-gradient(90deg, #f59e0b, #22d3ee); }
+.training-card-3 .tr-cat { color: #f59e0b; }
+.training-card-3:hover { box-shadow: 0 16px 48px rgba(245,158,11,0.10); }
+
+.tr-top {
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  border-radius: 18px 18px 0 0;
+}
+.tr-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.3); margin-bottom: 8px;
+}
+.tr-cat {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; margin-bottom: 16px;
+}
+.tr-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 21px; font-weight: 700;
+  color: var(--text); line-height: 1.25;
+  margin-bottom: 16px;
+}
+.tr-desc {
+  font-size: 14px; color: var(--text-muted);
+  line-height: 1.7; flex: 1; margin-bottom: 28px;
+}
+.tr-cta {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  transition: letter-spacing 0.2s;
+}
+.training-card-1 .tr-cta { color: #22d3ee; }
+.training-card-2 .tr-cta { color: #e879f9; }
+.training-card-3 .tr-cta { color: #f59e0b; }
+.training-card:hover .tr-cta { letter-spacing: 0.15em; }
+
+@media (max-width: 900px) {
+  #trainings { padding: 60px 24px; }
+  .trainings-header { padding: 36px 28px; }
+  .trainings-grid { grid-template-columns: 1fr; }
+}
+
 /* FOOTER */
 footer {
   position: relative;
@@ -1831,6 +2005,7 @@ nav {
     <li><a href="#datasets">Datasets</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="#trainings" style="color:var(--cyan);font-weight:700;">Trainings</a></li>
   </ul>
 </nav>
 
@@ -2387,6 +2562,53 @@ nav {
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- TRAININGS & DEPLOYMENTS -->
+<section id="trainings">
+
+  <!-- Big featured header tab -->
+  <div class="trainings-header">
+    <div class="trainings-eyebrow">Available Now</div>
+    <h2 class="trainings-main-title">
+      Trainings &amp;<br><span>Deployments Available</span>
+    </h2>
+    <p class="trainings-main-desc">
+      Hands-on programs designed for clinicians, analysts, and builders who want to stop theorising and start shipping real AI systems.
+    </p>
+  </div>
+
+  <!-- Three programme cards -->
+  <div class="trainings-grid">
+
+    <a href="https://www.linkedin.com/in/dr-muhammadfarooq/" target="_blank" class="training-card training-card-1">
+      <div class="tr-top"></div>
+      <div class="tr-date">2026</div>
+      <div class="tr-cat">Data &amp; Analytics</div>
+      <div class="tr-title">Learn Power BI in 59 Minutes</div>
+      <p class="tr-desc">From blank canvas to published dashboard in under an hour — data modeling, DAX essentials, visual storytelling, and sharing interactive reports with your team.</p>
+      <div class="tr-cta">Enroll Now →</div>
+    </a>
+
+    <a href="https://www.linkedin.com/in/dr-muhammadfarooq/" target="_blank" class="training-card training-card-2">
+      <div class="tr-top"></div>
+      <div class="tr-date">2026</div>
+      <div class="tr-cat">AI &amp; Agents</div>
+      <div class="tr-title">Deploy AI Agents with Dr. Farooq</div>
+      <p class="tr-desc">Build production-ready AI agents from scratch — 5-layer architecture, tool use, memory persistence, error handling, and cloud deployment. Real code, real systems.</p>
+      <div class="tr-cta">Enroll Now →</div>
+    </a>
+
+    <a href="https://www.linkedin.com/in/dr-muhammadfarooq/" target="_blank" class="training-card training-card-3">
+      <div class="tr-top"></div>
+      <div class="tr-date">2026</div>
+      <div class="tr-cat">RAG &amp; Full Stack AI</div>
+      <div class="tr-title">RAG, Learn &amp; Deploy</div>
+      <p class="tr-desc">Retrieval-Augmented Generation from the ground up — vector stores, embeddings, chunking strategies, and deploying grounded AI systems that answer from your own knowledge base.</p>
+      <div class="tr-cta">Enroll Now →</div>
+    </a>
+
   </div>
 </section>
 
