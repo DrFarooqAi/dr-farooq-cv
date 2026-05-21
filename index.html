@@ -932,6 +932,44 @@ section:nth-child(even) {
 .training-card-3 .tr-cta { color: #f59e0b; }
 .training-card:hover .tr-cta { letter-spacing: 0.15em; }
 
+.tr-series-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+}
+.tr-series-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.tr-series-item:hover {
+  background: rgba(245,158,11,0.08);
+  border-color: rgba(245,158,11,0.35);
+}
+.tr-series-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  color: #f59e0b; letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+.tr-series-title {
+  font-size: 13px; color: var(--text-dim);
+  flex: 1; line-height: 1.3;
+}
+.tr-series-item:hover .tr-series-title { color: var(--text); }
+.tr-series-arrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: #f59e0b;
+  flex-shrink: 0;
+}
+
 @media (max-width: 900px) {
   #trainings { padding: 60px 24px; }
   .trainings-header { padding: 36px 28px; }
@@ -2600,14 +2638,25 @@ nav {
       <div class="tr-cta">Enroll Now →</div>
     </a>
 
-    <a href="https://drfarooqai.github.io/articles/ai/The%20RAG%20Handbook%20_standalone_.html" target="_blank" class="training-card training-card-3">
+    <div class="training-card training-card-3">
       <div class="tr-top"></div>
-      <div class="tr-date">2026 · Series · 2 Articles</div>
+      <div class="tr-date">2026 · Growing Series</div>
       <div class="tr-cat">RAG &amp; Full Stack AI</div>
       <div class="tr-title">RAG, Learn &amp; Deploy</div>
-      <p class="tr-desc">A growing series on Retrieval-Augmented Generation — The Complete RAG Handbook, tabular RAG for Excel, vector stores, embeddings, and production deployment patterns.</p>
-      <div class="tr-cta">Start Series →</div>
-    </a>
+      <p class="tr-desc">A growing series on Retrieval-Augmented Generation — from the complete handbook to domain-specific deep dives. Each article stands alone; together they build expertise.</p>
+      <div class="tr-series-list">
+        <a href="https://drfarooqai.github.io/articles/ai/rag-for-excel-deep-dive.html" target="_blank" class="tr-series-item">
+          <span class="tr-series-num">01</span>
+          <span class="tr-series-title">RAG for Excel — A Deep Dive</span>
+          <span class="tr-series-arrow">→</span>
+        </a>
+        <a href="https://drfarooqai.github.io/articles/ai/The%20RAG%20Handbook%20_standalone_.html" target="_blank" class="tr-series-item">
+          <span class="tr-series-num">02</span>
+          <span class="tr-series-title">The Complete Handbook of RAG</span>
+          <span class="tr-series-arrow">→</span>
+        </a>
+      </div>
+    </div>
 
   </div>
 </section>
