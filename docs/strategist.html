@@ -18,6 +18,7 @@
     --cyan:#05f5e9;
     --cyan-dim:#0bb9b1;
     --gold:#f0a500;
+    --magenta:#ff2e97;
     --line:rgba(5,245,233,.14);
     --line-soft:rgba(159,179,177,.12);
     --card:rgba(13,22,25,.72);
@@ -68,6 +69,29 @@
   h1 em{font-style:italic;color:var(--cyan)}
   .sub{color:var(--ink-soft);font-size:15px;max-width:440px;margin:0 auto}
   .brandline{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;color:var(--ink-faint);margin-top:14px;text-transform:uppercase}
+  /* cyberpunk glitch brand */
+  .cyber{position:relative;display:inline-block;margin-top:16px;font-family:'JetBrains Mono',monospace;font-weight:600;
+    font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#eafffd;
+    text-shadow:0 0 7px rgba(5,245,233,.55),0 0 2px rgba(255,46,151,.4)}
+  .cyber span{color:var(--cyan)}
+  .cyber::before,.cyber::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;
+    overflow:hidden;opacity:.85;pointer-events:none}
+  .cyber::before{color:var(--magenta);animation:glitchA 2.4s infinite steps(2) alternate-reverse}
+  .cyber::after{color:var(--cyan);animation:glitchB 3.1s infinite steps(2) alternate-reverse}
+  @keyframes glitchA{
+    0%{clip-path:inset(0 0 86% 0);transform:translate(-1.5px,-1px)}
+    20%{clip-path:inset(58% 0 22% 0);transform:translate(1.5px,1px)}
+    40%{clip-path:inset(30% 0 52% 0);transform:translate(-1px,1px)}
+    60%{clip-path:inset(80% 0 4% 0);transform:translate(1px,-1px)}
+    80%{clip-path:inset(12% 0 70% 0);transform:translate(-1.5px,0)}
+    100%{clip-path:inset(44% 0 36% 0);transform:translate(1.5px,1px)}}
+  @keyframes glitchB{
+    0%{clip-path:inset(70% 0 12% 0);transform:translate(1.5px,1px)}
+    25%{clip-path:inset(20% 0 60% 0);transform:translate(-1.5px,-1px)}
+    50%{clip-path:inset(50% 0 32% 0);transform:translate(1px,0)}
+    75%{clip-path:inset(6% 0 80% 0);transform:translate(-1px,1px)}
+    100%{clip-path:inset(34% 0 46% 0);transform:translate(1.5px,-1px)}}
+  @media(prefers-reduced-motion:reduce){.cyber::before,.cyber::after{animation:none;opacity:0}}
   .free-badge{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:11px;
     letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);background:rgba(5,245,233,.07);
     border:1px solid rgba(5,245,233,.25);border-radius:100px;padding:8px 16px;margin-top:16px}
@@ -205,6 +229,12 @@
   .x:hover{color:var(--ink)}
 
   footer{margin-top:auto;padding-top:34px;text-align:center}
+  .flinks{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0;margin-bottom:14px}
+  .flinks a{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--cyan-dim);text-decoration:none;padding:6px 14px;position:relative;transition:.2s}
+  .flinks a:not(:last-child)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);
+    width:1px;height:11px;background:var(--line)}
+  .flinks a:hover{color:var(--cyan);text-shadow:0 0 9px rgba(5,245,233,.7)}
   footer .fl{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--ink-faint);text-transform:uppercase}
   footer .fl b{color:var(--ink-soft);font-weight:500}
   footer a{color:var(--cyan-dim);text-decoration:none}
@@ -239,7 +269,7 @@
     <span class="eyebrow">Decision intelligence</span>
     <h1>The Strategist's <em>Coach</em></h1>
     <p class="sub">A free AI coach that thinks through your toughest decisions like a strategist — it finds the <em style="color:var(--ink);font-style:normal">real</em> problem beneath what you describe and gives you your next move.</p>
-    <div class="brandline">Dr. Muhammad Farooq · AI Top Voice · AI Doctor</div>
+    <div class="cyber" data-text="Dr. Muhammad Farooq · AI Top Voice · AI Doctor">Dr. Muhammad Farooq <span>·</span> AI Top Voice <span>·</span> AI Doctor</div>
     <div class="free-badge"><span class="d"></span>100% free · no sign-up · nothing stored</div>
   </header>
 
@@ -283,7 +313,14 @@
   </div>
 
   <footer>
-    <div class="fl">Built by <b>Dr. Muhammad Farooq</b> · AI Doctor · LinkedIn Top Voice<br>
+    <div class="flinks">
+      <a href="https://drfarooqai.github.io/dr-farooq-cv" target="_blank" rel="noopener">CV</a>
+      <a href="https://drfarooqai.blogspot.com" target="_blank" rel="noopener">Articles</a>
+      <a href="https://www.linkedin.com/in/dr-muhammadfarooq" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/DrFarooqAi" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://drfarooqai.github.io" target="_blank" rel="noopener">Portfolio</a>
+    </div>
+    <div class="fl">Built by <b>Dr. Muhammad Farooq</b> — AI Doctor · LinkedIn Top Voice<br>
     Runs on Groq Llama 3.3 70B · your key, your browser, free</div>
   </footer>
 </div>
@@ -447,7 +484,7 @@ $("#reset").onclick=()=>{ history=[]; out.innerHTML=""; $("#ta").value=""; follo
 /* ============== principles drawer ============== */
 const drawer=$("#drawer"), prList=$("#prList");
 PRINCIPLES.forEach(p=>{ const d=document.createElement("div"); d.className="pr";
-  d.innerHTML=`<div class="n">${p.n}</div><div class="t">${p.t}</div><div class="d">${p.d}</div><div class="ask">"${p.ask}"</div>`;
+  d.innerHTML=`<div class="n">${p.n}</div><div class="t">${p.t}</div><div class="d">${p.d}</div><div class="ask">“${p.ask}”</div>`;
   d.style.cursor="pointer";
   d.onclick=()=>{ drawer.classList.remove("show"); ask(`How does the principle "${p.t}" apply to what I'm dealing with?`); };
   prList.appendChild(d); });
