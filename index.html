@@ -100,6 +100,20 @@ body::after {
   pointer-events: none;
 }
 
+/* CYBERPUNK GLOBE */
+.globe-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 270px;
+  height: 270px;
+  z-index: 1;
+  pointer-events: none;
+}
+#globeCanvas { width: 100%; height: 100%; display: block; }
+@media (max-width: 900px) { .globe-wrap { display: none; } }
+
 .hero-left {
   padding: 80px 60px 80px 80px;
   display: flex;
@@ -279,6 +293,7 @@ body::after {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  z-index: 2;
 }
 
 .photo-frame {
@@ -2325,7 +2340,8 @@ nav {
 <!-- HERO -->
 <div class="hero">
   <div class="hero-glow"></div>
-  
+  <div class="globe-wrap"><canvas id="globeCanvas"></canvas></div>
+
   <div class="hero-left">
     <div class="hero-name">
       <div class="line1">Dr. Muhammad</div>
@@ -3049,6 +3065,130 @@ document.querySelectorAll('.project-card, .skill-group, .timeline-item, .pipelin
   el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
   observer.observe(el);
 }});
+</script>
+
+<script>
+/* ── CYBERPUNK GLOBE ── */
+(function(){
+  const cvs = document.getElementById('globeCanvas');
+  if(!cvs) return;
+  const dpr = Math.min(window.devicePixelRatio||1, 2);
+  const S = 270;
+  cvs.width = S*dpr; cvs.height = S*dpr;
+  const ctx = cvs.getContext('2d');
+  ctx.scale(dpr, dpr);
+  const cx=S/2, cy=S/2, R=102, ORB=R*1.32;
+
+  /* Sphere dots — Fibonacci lattice */
+  const NDOTS = 2600;
+  const dots = [];
+  for(let i=0;i<NDOTS;i++){
+    const phi = Math.acos(1-2*(i+.5)/NDOTS);
+    const th  = Math.PI*(1+Math.sqrt(5))*i;
+    dots.push([phi,th]);
+  }
+
+  /* Satellites [speed, phase, inclination, color, tailLen] */
+  const SATS = [
+    [.0072,  0.00,  0.38, '#05f5e9', 42],   /* teal  */
+    [.0118,  2.09, -0.88, '#ff2e97', 34],   /* pink  */
+    [.0055,  4.19,  1.28, '#e8f4f3', 28],   /* white */
+    [.0095,  1.05,  0.68, '#a78bfa', 32],   /* purple */
+    [.0085,  3.14, -0.50, '#05f5e9', 24],   /* teal 2 */
+  ];
+  const hist = SATS.map(()=>[]);
+  let rot=0, frame=0;
+
+  function satPos(spd,ph,inc){
+    const a = frame*spd+ph;
+    const sx = ORB*Math.cos(a);
+    const si = ORB*Math.sin(a);
+    const sy = si*Math.cos(inc);
+    const sz = si*Math.sin(inc);
+    return {
+      x: cx + sx*Math.cos(rot)+sz*Math.sin(rot),
+      y: cy + sy,
+      z:    -sx*Math.sin(rot)+sz*Math.cos(rot)
+    };
+  }
+
+  function tick(){
+    ctx.clearRect(0,0,S,S);
+    rot += .0025; frame++;
+
+    /* Dark globe body */
+    const bg = ctx.createRadialGradient(cx,cy,0,cx,cy,R);
+    bg.addColorStop(0,'rgba(2,20,26,.92)');
+    bg.addColorStop(.82,'rgba(1,12,18,.96)');
+    bg.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2);
+    ctx.fillStyle=bg; ctx.fill();
+
+    /* Grid dots */
+    for(let i=0;i<dots.length;i++){
+      const [phi,th]=dots[i];
+      const x = R*Math.sin(phi)*Math.cos(th+rot);
+      const y = R*Math.cos(phi);
+      const z = R*Math.sin(phi)*Math.sin(th+rot);
+      const depth=(z+R)/(2*R);
+      const a=.04+depth*.38;
+      const s=.45+depth*.95;
+      ctx.beginPath();
+      ctx.arc(cx+x,cy+y,s,0,Math.PI*2);
+      ctx.fillStyle=`rgba(5,245,233,${a})`;
+      ctx.fill();
+    }
+
+    /* Atmosphere glow */
+    const atm=ctx.createRadialGradient(cx,cy,R*.86,cx,cy,R*1.15);
+    atm.addColorStop(0,'rgba(5,245,233,0)');
+    atm.addColorStop(.45,'rgba(5,245,233,.07)');
+    atm.addColorStop(1,'rgba(5,245,233,0)');
+    ctx.beginPath(); ctx.arc(cx,cy,R*1.15,0,Math.PI*2);
+    ctx.fillStyle=atm; ctx.fill();
+
+    /* Outer rim glow */
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2);
+    ctx.strokeStyle='rgba(5,245,233,.18)';
+    ctx.lineWidth=1.5; ctx.stroke();
+
+    /* Satellites */
+    SATS.forEach(([spd,ph,inc,color,tailLen],i)=>{
+      const pos=satPos(spd,ph,inc);
+      hist[i].push({...pos});
+      if(hist[i].length>tailLen) hist[i].shift();
+      const h=hist[i];
+      if(h.length<2) return;
+
+      /* Tail */
+      for(let j=1;j<h.length;j++){
+        const p0=h[j-1],p1=h[j];
+        const fr=j/h.length;
+        ctx.beginPath();
+        ctx.moveTo(p0.x,p0.y); ctx.lineTo(p1.x,p1.y);
+        ctx.strokeStyle=color+Math.round(fr*fr*200).toString(16).padStart(2,'0');
+        ctx.lineWidth=fr*2.8;
+        ctx.lineCap='round';
+        ctx.stroke();
+      }
+
+      /* Node */
+      const last=h[h.length-1];
+      ctx.save();
+      ctx.globalAlpha=last.z>=-R*.08?1:.32;
+      ctx.shadowBlur=20; ctx.shadowColor=color;
+      ctx.beginPath(); ctx.arc(last.x,last.y,3.8,0,Math.PI*2);
+      ctx.fillStyle=color; ctx.fill();
+      ctx.shadowBlur=0;
+      ctx.beginPath(); ctx.arc(last.x,last.y,1.6,0,Math.PI*2);
+      ctx.fillStyle='#fff'; ctx.fill();
+      ctx.restore();
+    });
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
 </script>
 
 </body>
