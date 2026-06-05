@@ -106,8 +106,8 @@ body::after {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 290px;
-  height: 290px;
+  width: 340px;
+  height: 340px;
   z-index: 1;
   pointer-events: none;
 }
@@ -3068,182 +3068,154 @@ document.querySelectorAll('.project-card, .skill-group, .timeline-item, .pipelin
 </script>
 
 <script>
-/* ── CYBERPUNK GLOBE v2 — world map dots + data arcs + snake ring ── */
+/* ── CYBERPUNK GLOBE v3 — world map + 3 clean orbital satellites ── */
 (function(){
   const cvs=document.getElementById('globeCanvas');
-  if(!cvs) return;
+  if(!cvs)return;
   const dpr=Math.min(window.devicePixelRatio||1,2);
-  const S=290;
+  const S=340;
   cvs.width=S*dpr; cvs.height=S*dpr;
   const ctx=cvs.getContext('2d');
   ctx.scale(dpr,dpr);
-  const cx=S/2,cy=S/2,R=108;
+  const cx=S/2,cy=S/2,R=108,ORB=R*1.27;
 
-  /* ── Approximate world land mask ── */
+  /* ── World land mask ── */
   function isLand(lat,lon){
     lon=((lon%360)+360)%360; if(lon>180)lon-=360;
-    if(lat>63&&lat<85&&lon>-55&&lon<-15)return true;   // Greenland
-    if(lat>60&&lat<75&&lon>-140&&lon<-60)return true;  // Alaska/N Canada
-    if(lat>45&&lat<65&&lon>-130&&lon<-60)return true;  // Canada
-    if(lat>30&&lat<50&&lon>-125&&lon<-65)return true;  // USA
-    if(lat>15&&lat<32&&lon>-120&&lon<-85)return true;  // Mexico
-    if(lat>5&&lat<20&&lon>-92&&lon<-77)return true;    // C.America
-    if(lat>50&&lat<62&&lon>-8&&lon<2)return true;      // UK/Ireland
-    if(lat>63&&lat<67&&lon>-24&&lon<-13)return true;   // Iceland
-    if(lat>55&&lat<72&&lon>5&&lon<32)return true;      // Scandinavia
-    if(lat>48&&lat<58&&lon>-4&&lon<22)return true;     // W.Europe
-    if(lat>35&&lat<50&&lon>-9&&lon<30)return true;     // S.Europe
-    if(lat>40&&lat<60&&lon>22&&lon<42)return true;     // E.Europe
-    if(lat>-5&&lat<12&&lon>-80&&lon<-50)return true;   // N.S.America
-    if(lat>-25&&lat<-4&&lon>-80&&lon<-35)return true;  // C.S.America
-    if(lat>-40&&lat<-24&&lon>-72&&lon<-40)return true; // S.S.America
-    if(lat>-58&&lat<-38&&lon>-70&&lon<-50)return true; // Patagonia
-    if(lat>20&&lat<37&&lon>-18&&lon<38)return true;    // N.Africa
-    if(lat>0&&lat<22&&lon>-18&&lon<42)return true;     // W/C.Africa
-    if(lat>-10&&lat<2&&lon>8&&lon<46)return true;      // C/E.Africa
-    if(lat>-30&&lat<-8&&lon>12&&lon<42)return true;    // SE.Africa
-    if(lat>-36&&lat<-29&&lon>17&&lon<33)return true;   // S.Africa tip
-    if(lat>-26&&lat<-11&&lon>43&&lon<51)return true;   // Madagascar
-    if(lat>12&&lat<38&&lon>34&&lon<62)return true;     // Middle East
-    if(lat>20&&lat<30&&lon>44&&lon<62)return true;     // Arabian Peninsula
-    if(lat>35&&lat<55&&lon>50&&lon<90)return true;     // C.Asia
-    if(lat>60&&lat<75&&lon>60&&lon<130)return true;    // N.Siberia
-    if(lat>45&&lat<62&&lon>60&&lon<140)return true;    // Siberia
-    if(lat>30&&lat<48&&lon>75&&lon<135)return true;    // C/E.Asia
-    if(lat>5&&lat<36&&lon>65&&lon<90)return true;      // India
-    if(lat>20&&lat<32&&lon>98&&lon<122)return true;    // SE.China
-    if(lat>10&&lat<25&&lon>98&&lon<112)return true;    // Indochina
-    if(lat>-8&&lat<6&&lon>95&&lon<142)return true;     // Indonesia
-    if(lat>5&&lat<22&&lon>100&&lon<128)return true;    // Philippines/Malaysia
-    if(lat>30&&lat<46&&lon>130&&lon<146)return true;   // Japan
-    if(lat>33&&lat<39&&lon>125&&lon<130)return true;   // Korea
-    if(lat>-40&&lat<-10&&lon>112&&lon<155)return true; // Australia
-    if(lat>-47&&lat<-34&&lon>166&&lon<178)return true; // New Zealand
-    if(lat<-65)return true;                            // Antarctica
+    if(lat>63&&lat<85&&lon>-55&&lon<-15)return true;
+    if(lat>60&&lat<75&&lon>-140&&lon<-60)return true;
+    if(lat>45&&lat<65&&lon>-130&&lon<-60)return true;
+    if(lat>30&&lat<50&&lon>-125&&lon<-65)return true;
+    if(lat>15&&lat<32&&lon>-120&&lon<-85)return true;
+    if(lat>5&&lat<20&&lon>-92&&lon<-77)return true;
+    if(lat>50&&lat<62&&lon>-8&&lon<2)return true;
+    if(lat>63&&lat<67&&lon>-24&&lon<-13)return true;
+    if(lat>55&&lat<72&&lon>5&&lon<32)return true;
+    if(lat>48&&lat<58&&lon>-4&&lon<22)return true;
+    if(lat>35&&lat<50&&lon>-9&&lon<30)return true;
+    if(lat>40&&lat<60&&lon>22&&lon<42)return true;
+    if(lat>-5&&lat<12&&lon>-80&&lon<-50)return true;
+    if(lat>-25&&lat<-4&&lon>-80&&lon<-35)return true;
+    if(lat>-40&&lat<-24&&lon>-72&&lon<-40)return true;
+    if(lat>-58&&lat<-38&&lon>-70&&lon<-50)return true;
+    if(lat>20&&lat<37&&lon>-18&&lon<38)return true;
+    if(lat>0&&lat<22&&lon>-18&&lon<42)return true;
+    if(lat>-10&&lat<2&&lon>8&&lon<46)return true;
+    if(lat>-30&&lat<-8&&lon>12&&lon<42)return true;
+    if(lat>-36&&lat<-29&&lon>17&&lon<33)return true;
+    if(lat>-26&&lat<-11&&lon>43&&lon<51)return true;
+    if(lat>12&&lat<38&&lon>34&&lon<64)return true;
+    if(lat>20&&lat<30&&lon>44&&lon<62)return true;
+    if(lat>35&&lat<55&&lon>50&&lon<90)return true;
+    if(lat>60&&lat<75&&lon>60&&lon<130)return true;
+    if(lat>45&&lat<62&&lon>60&&lon<140)return true;
+    if(lat>30&&lat<48&&lon>75&&lon<135)return true;
+    if(lat>5&&lat<36&&lon>65&&lon<90)return true;
+    if(lat>20&&lat<32&&lon>98&&lon<122)return true;
+    if(lat>10&&lat<25&&lon>98&&lon<112)return true;
+    if(lat>-8&&lat<6&&lon>95&&lon<142)return true;
+    if(lat>5&&lat<22&&lon>100&&lon<128)return true;
+    if(lat>30&&lat<46&&lon>130&&lon<146)return true;
+    if(lat>33&&lat<39&&lon>125&&lon<130)return true;
+    if(lat>-40&&lat<-10&&lon>112&&lon<155)return true;
+    if(lat>-47&&lat<-34&&lon>166&&lon<178)return true;
+    if(lat<-65)return true;
     return false;
   }
 
-  /* ── Build world-map dot set (Fibonacci sphere, land only) ── */
+  /* ── World-map dots (Fibonacci sphere filtered to land) ── */
   const dots=[];
-  const PHI=Math.PI*(1+Math.sqrt(5));
-  for(let i=0;i<8000;i++){
-    const phi=Math.acos(1-2*(i+.5)/8000);
-    const th=PHI*i;
-    const lat=90-phi*180/Math.PI;
-    const lon=th*180/Math.PI;
-    if(isLand(lat,lon)) dots.push([phi,th]);
+  const GPHI=Math.PI*(1+Math.sqrt(5));
+  for(let i=0;i<15000;i++){
+    const phi=Math.acos(1-2*(i+.5)/15000);
+    const th=GPHI*i;
+    if(isLand(90-phi*180/Math.PI, th*180/Math.PI)) dots.push([phi,th]);
   }
 
-  /* ── City coords [lat, lon] ── */
-  const C=[
-    [40.7,-74.0],[51.5,-0.1],[24.7,46.7],[25.2,55.3],
-    [1.3,103.8],[35.7,139.7],[-33.9,151.2],[52.5,13.4],
-    [19.1,72.9],[39.9,116.4],[-1.3,36.8],[55.8,37.6]
+  /* ── 3 orbital satellites — varied inclinations, NO ring clipping ──
+     inclinations chosen so orbits cross globe from different angles:
+     teal  : slightly tilted (like ISS orbit)
+     pink  : steep reverse tilt
+     white : near-polar (top-to-bottom)                              */
+  const SATS=[
+    [.0095, 0.00,  0.52, '#05f5e9'],
+    [.0125, 2.09, -0.92, '#ff2e97'],
+    [.0072, 4.19,  1.35, '#e8f4f3'],
   ];
-
-  /* ── Data arcs [from,to,color,speed] ── */
-  const ARCS=[
-    [0,1,'#ff2e97',.0045],[1,2,'#05f5e9',.005],[2,3,'#a78bfa',.006],
-    [3,4,'#05f5e9',.0042],[4,5,'#ff2e97',.0055],[5,6,'#a78bfa',.0038],
-    [1,10,'#05f5e9',.006],[7,1,'#a78bfa',.0045],[8,4,'#ff2e97',.005],
-    [9,5,'#05f5e9',.005],[11,7,'#a78bfa',.004],[2,8,'#ff2e97',.0058],
-  ];
-  const aState=ARCS.map((_,i)=>({t:i/ARCS.length, tl:.15+Math.random()*.1}));
-
-  function toVec(lat,lon){
-    const p=(90-lat)*Math.PI/180,t=lon*Math.PI/180;
-    return[Math.sin(p)*Math.cos(t),Math.cos(p),Math.sin(p)*Math.sin(t)];
-  }
-  function slerp(a,b,t){
-    const d=Math.max(-1,Math.min(1,a[0]*b[0]+a[1]*b[1]+a[2]*b[2]));
-    const th=Math.acos(d); if(th<.001)return a;
-    const st=Math.sin(th),w1=Math.sin((1-t)*th)/st,w2=Math.sin(t*th)/st;
-    return[a[0]*w1+b[0]*w2,a[1]*w1+b[1]*w2,a[2]*w1+b[2]*w2];
-  }
-  function proj(v,r){
-    const x=v[0]*Math.cos(r)+v[2]*Math.sin(r);
-    const z=-v[0]*Math.sin(r)+v[2]*Math.cos(r);
-    return{sx:cx+x*R, sy:cy+v[1]*R, z};
-  }
-
+  const TAIL=100;
+  const hist=SATS.map(()=>[]);
   let rot=0,frame=0;
-  const ASTEPS=50;
+
+  function satPos(spd,ph,inc){
+    const a=frame*spd+ph;
+    const sx=ORB*Math.cos(a);
+    const sy=ORB*Math.sin(a)*Math.cos(inc);
+    const sz=ORB*Math.sin(a)*Math.sin(inc);
+    return{
+      x: cx+sx*Math.cos(rot)+sz*Math.sin(rot),
+      y: cy+sy,
+      z:   -sx*Math.sin(rot)+sz*Math.cos(rot)
+    };
+  }
 
   function tick(){
     ctx.clearRect(0,0,S,S);
     rot+=.003; frame++;
 
-    /* Dark globe body */
+    /* Globe dark body */
     const bg=ctx.createRadialGradient(cx,cy,0,cx,cy,R);
     bg.addColorStop(0,'rgba(2,20,26,.93)');
     bg.addColorStop(.85,'rgba(1,12,18,.97)');
     bg.addColorStop(1,'rgba(0,0,0,0)');
     ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.fillStyle=bg;ctx.fill();
 
-    /* World-map land dots */
+    /* World-map dots — small, bright, continent-shaped */
     for(let i=0;i<dots.length;i++){
       const[phi,th]=dots[i];
       const x=R*Math.sin(phi)*Math.cos(th+rot);
       const y=R*Math.cos(phi);
       const z=R*Math.sin(phi)*Math.sin(th+rot);
       if(z<-R*.04)continue;
-      const depth=(z+R)/(2*R);
-      const a=.16+depth*.58;
-      const s=.55+depth*1.15;
-      ctx.beginPath();ctx.arc(cx+x,cy+y,s,0,Math.PI*2);
-      ctx.fillStyle=`rgba(5,245,233,${a})`;ctx.fill();
+      const d=(z+R)/(2*R);
+      ctx.beginPath();ctx.arc(cx+x,cy+y,.42+d*.82,0,Math.PI*2);
+      ctx.fillStyle=`rgba(5,245,233,${.13+d*.56})`;ctx.fill();
     }
 
     /* Atmosphere glow */
-    const atm=ctx.createRadialGradient(cx,cy,R*.85,cx,cy,R*1.2);
+    const atm=ctx.createRadialGradient(cx,cy,R*.84,cx,cy,R*1.18);
     atm.addColorStop(0,'rgba(5,245,233,0)');
-    atm.addColorStop(.4,'rgba(5,245,233,.07)');
+    atm.addColorStop(.38,'rgba(5,245,233,.06)');
     atm.addColorStop(1,'rgba(5,245,233,0)');
-    ctx.beginPath();ctx.arc(cx,cy,R*1.2,0,Math.PI*2);ctx.fillStyle=atm;ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,R*1.18,0,Math.PI*2);ctx.fillStyle=atm;ctx.fill();
 
-    /* Data arcs — thin sweeping tails across globe surface */
-    ARCS.forEach(([a,b,color,spd],i)=>{
-      const st=aState[i];
-      st.t=(st.t+spd)%1;
-      const head=st.t, tail=Math.max(0,head-st.tl);
-      const v1=toVec(...C[a]),v2=toVec(...C[b]);
-      const pts=[];
-      for(let s=0;s<=ASTEPS;s++){
-        const t=tail+(head-tail)*s/ASTEPS;
-        const v=slerp(v1,v2,t);
-        pts.push({...proj([v[0]*1.022,v[1]*1.022,v[2]*1.022],rot), frac:s/ASTEPS});
+    /* Orbital satellites — long thin tails orbiting freely */
+    SATS.forEach(([spd,ph,inc,color],i)=>{
+      const pos=satPos(spd,ph,inc);
+      hist[i].push({...pos});
+      if(hist[i].length>TAIL)hist[i].shift();
+      const h=hist[i];
+      if(h.length<2)return;
+
+      /* Tail: thin, fading, skips behind-globe segments */
+      for(let j=1;j<h.length;j++){
+        const p0=h[j-1],p1=h[j];
+        if(p1.z<-R*.1&&p0.z<-R*.1)continue;
+        const fr=j/h.length;
+        ctx.beginPath();ctx.moveTo(p0.x,p0.y);ctx.lineTo(p1.x,p1.y);
+        ctx.strokeStyle=color+Math.round(fr*fr*210).toString(16).padStart(2,'0');
+        ctx.lineWidth=.12+fr*1.1;ctx.lineCap='round';ctx.stroke();
       }
-      for(let j=1;j<pts.length;j++){
-        const p0=pts[j-1],p1=pts[j];
-        if(p1.z<-R*.12)continue;
-        const alpha=p1.frac*p1.frac*.88;
-        ctx.beginPath();ctx.moveTo(p0.sx,p0.sy);ctx.lineTo(p1.sx,p1.sy);
-        ctx.strokeStyle=color+Math.round(alpha*255).toString(16).padStart(2,'0');
-        ctx.lineWidth=.45+p1.frac*1.6;ctx.lineCap='round';ctx.stroke();
-      }
-      const hp=pts[pts.length-1];
-      if(hp.z>-R*.12){
-        ctx.save();ctx.shadowBlur=10;ctx.shadowColor=color;
-        ctx.beginPath();ctx.arc(hp.sx,hp.sy,2.2,0,Math.PI*2);
+
+      /* Satellite head node */
+      if(pos.z>-R*.1){
+        ctx.save();
+        ctx.shadowBlur=14;ctx.shadowColor=color;
+        ctx.beginPath();ctx.arc(pos.x,pos.y,3.0,0,Math.PI*2);
         ctx.fillStyle=color;ctx.fill();
         ctx.shadowBlur=0;
-        ctx.beginPath();ctx.arc(hp.sx,hp.sy,.9,0,Math.PI*2);
+        ctx.beginPath();ctx.arc(pos.x,pos.y,1.1,0,Math.PI*2);
         ctx.fillStyle='#fff';ctx.fill();
         ctx.restore();
-      }
-    });
-
-    /* Moving snake glow ring — pink, teal, violet */
-    const rR=R*1.052;
-    const snakeLen=1.9;
-    [[frame*.011,'255,46,151'],[frame*.011+Math.PI,'5,245,233'],[frame*.008+2.09,'167,139,250']].forEach(([off,rgb])=>{
-      const SEGS=44;
-      for(let i=0;i<SEGS;i++){
-        const t=i/SEGS;
-        ctx.beginPath();
-        ctx.arc(cx,cy,rR, off+t*snakeLen, off+(i+1)/SEGS*snakeLen);
-        ctx.strokeStyle=`rgba(${rgb},${Math.sin(t*Math.PI)*.92})`;
-        ctx.lineWidth=1.0;ctx.stroke();
       }
     });
 
