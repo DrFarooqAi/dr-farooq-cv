@@ -1265,6 +1265,244 @@ section:nth-child(even) {
   .pga-body { grid-template-columns: 1fr; }
 }
 
+/* VISION 2030 & AI IN HEALTH */
+#vision2030 {
+  position: relative;
+  z-index: 1;
+  padding: 0 80px 100px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.v30-header {
+  position: relative;
+  background: linear-gradient(135deg, rgba(0,137,123,0.08), rgba(21,101,192,0.06), rgba(98,0,234,0.04));
+  border: 1px solid rgba(0,137,123,0.28);
+  border-radius: 24px;
+  padding: 56px 60px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  text-align: center;
+}
+.v30-header::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #00897b, #1565c0, #6200ea, #00897b);
+  background-size: 300% 100%;
+  animation: th-shimmer 4s linear infinite;
+  border-radius: 24px 24px 0 0;
+}
+.v30-header::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,137,123,0.3), transparent);
+}
+
+.v30-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: #00897b;
+  margin-bottom: 20px;
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.v30-eyebrow::before, .v30-eyebrow::after {
+  content: ''; width: 32px; height: 1px;
+}
+.v30-eyebrow::before { background: linear-gradient(90deg, transparent, #00897b); }
+.v30-eyebrow::after  { background: linear-gradient(90deg, #00897b, transparent); }
+
+.v30-main-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.v30-main-title span {
+  background: linear-gradient(90deg, #00897b, #1565c0, #6200ea);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: th-shimmer 4s linear infinite;
+}
+
+.v30-main-desc {
+  font-size: 17px; color: var(--text-muted);
+  max-width: 620px; margin: 0 auto;
+  line-height: 1.75;
+}
+
+.v30-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.v30-featured-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(0,137,123,0.10), rgba(21,101,192,0.06));
+  border: 1px solid rgba(0,137,123,0.30);
+  border-radius: 18px;
+  padding: 44px 36px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.v30-featured-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 56px rgba(0,137,123,0.18);
+}
+.v30-featured-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, #00897b, #1565c0, #6200ea);
+  background-size: 200% 100%;
+  animation: th-shimmer 4s linear infinite;
+  border-radius: 18px 18px 0 0;
+}
+.v30-featured-card::after {
+  content: '';
+  position: absolute; left: 0; top: -100%; width: 2px; height: 200%;
+  background: linear-gradient(180deg, transparent, #00897b, transparent);
+  animation: tr-slide 3s linear infinite;
+}
+
+.v30-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #00897b;
+  border: 1px solid rgba(0,137,123,0.35);
+  background: rgba(0,137,123,0.10);
+  padding: 4px 12px; border-radius: 4px;
+  display: inline-block; margin-bottom: 24px;
+  width: fit-content;
+}
+
+.v30-featured-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px; font-weight: 800;
+  color: var(--text); line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.v30-featured-desc {
+  font-size: 15px; color: var(--text-muted);
+  line-height: 1.7; flex: 1;
+  margin-bottom: 32px;
+}
+
+.v30-featured-cta {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+  color: #00897b;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: letter-spacing 0.2s, color 0.2s;
+}
+.v30-featured-card:hover .v30-featured-cta {
+  letter-spacing: 0.15em;
+  color: #1565c0;
+}
+
+.v30-series-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 36px 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.v30-series-card::before {
+  content: '';
+  position: absolute; right: 0; top: -100%; width: 2px; height: 200%;
+  background: linear-gradient(180deg, transparent, #1565c0, transparent);
+  animation: tr-slide 3s linear infinite;
+  animation-delay: 1.5s;
+}
+
+.v30-series-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: #00897b;
+  margin-bottom: 8px;
+}
+
+.v30-series-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--text); margin-bottom: 8px;
+}
+
+.v30-series-desc {
+  font-size: 14px; color: var(--text-muted);
+  line-height: 1.65; margin-bottom: 24px;
+}
+
+.v30-articles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.v30-article-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.v30-article-item:hover {
+  background: rgba(0,137,123,0.08);
+  border-color: rgba(0,137,123,0.30);
+}
+.v30-article-item.coming-soon {
+  opacity: 0.38;
+  pointer-events: none;
+  cursor: default;
+}
+
+.v30-art-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  color: #00897b; letter-spacing: 0.08em;
+  flex-shrink: 0;
+}
+.v30-art-title {
+  font-size: 13px; color: var(--text-dim);
+  flex: 1; line-height: 1.3;
+}
+.v30-article-item:hover .v30-art-title { color: var(--text); }
+.v30-art-arrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: #00897b;
+  flex-shrink: 0;
+}
+.v30-art-soon {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 2px 7px; border-radius: 3px;
+}
+
+@media (max-width: 900px) {
+  #vision2030 { padding: 0 24px 80px; }
+  .v30-header { padding: 36px 28px; }
+  .v30-body { grid-template-columns: 1fr; }
+}
+
 /* FOOTER */
 footer {
   position: relative;
@@ -2334,6 +2572,7 @@ nav {
     <li><a href="#contact">Contact</a></li>
     <li><a href="#trainings" style="color:var(--cyan);font-weight:700;">Trainings</a></li>
     <li><a href="#pga" style="color:#c084fc;font-weight:700;">PGA</a></li>
+    <li><a href="#vision2030" style="color:#00897b;font-weight:700;">Vision 2030</a></li>
   </ul>
 </nav>
 
@@ -3036,6 +3275,58 @@ nav {
           <span class="pga-art-num">03</span>
           <span class="pga-art-title">Article coming soon</span>
           <span class="pga-art-soon">SOON</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- VISION 2030 & AI IN HEALTH -->
+<section id="vision2030">
+
+  <div class="v30-header">
+    <div class="v30-eyebrow">Article Series · Saudi Arabia</div>
+    <h2 class="v30-main-title">
+      Vision 2030<br><span>&amp; AI in Health</span>
+    </h2>
+    <p class="v30-main-desc">
+      Bridging national policy with clinical AI — deep dives into Saudi Arabia's AI governance frameworks, SDAIA initiatives, and how Vision 2030 is reshaping healthcare delivery.
+    </p>
+  </div>
+
+  <div class="v30-body">
+
+    <!-- Featured infographic card -->
+    <a href="https://drfarooqai.github.io/articles/ai/sdaia-ai-framework-infographic.html" target="_blank" class="v30-featured-card">
+      <div class="v30-badge">★ Infographic Deep Dive</div>
+      <div class="v30-featured-title">SDAIA AI Adoption Framework — Visual Guide</div>
+      <p class="v30-featured-desc">
+        A comprehensive visual breakdown of Saudi Arabia's official AI Adoption Framework — three interconnected pillars (Directions, Enablers, Outcomes), key impact metrics, and the governance model underpinning Vision 2030's digital transformation.
+      </p>
+      <div class="v30-featured-cta">View Infographic →</div>
+    </a>
+
+    <!-- Articles series card -->
+    <div class="v30-series-card">
+      <div class="v30-series-label">Article Series · 2026 · Growing</div>
+      <div class="v30-series-title">Vision 2030 &amp; AI — Deep Dives</div>
+      <p class="v30-series-desc">A growing series on AI governance, national policy, and healthcare transformation in Saudi Arabia. Connecting regulatory frameworks to real clinical outcomes.</p>
+      <div class="v30-articles-list">
+        <a href="https://drfarooqai.github.io/articles/ai/sdaia-ai-framework-infographic.html" target="_blank" class="v30-article-item">
+          <span class="v30-art-num">01</span>
+          <span class="v30-art-title">SDAIA AI Adoption Framework — A Visual Guide</span>
+          <span class="v30-art-arrow">→</span>
+        </a>
+        <div class="v30-article-item coming-soon">
+          <span class="v30-art-num">02</span>
+          <span class="v30-art-title">Article coming soon</span>
+          <span class="v30-art-soon">SOON</span>
+        </div>
+        <div class="v30-article-item coming-soon">
+          <span class="v30-art-num">03</span>
+          <span class="v30-art-title">Article coming soon</span>
+          <span class="v30-art-soon">SOON</span>
         </div>
       </div>
     </div>
