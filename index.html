@@ -1648,6 +1648,13 @@ footer {
   font-size: 11px;
   color: var(--text-muted);
 }
+.footer-links { display: flex; align-items: center; gap: 10px; }
+.footer-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.2s;
+}
+.footer-link:hover { color: var(--cyan); }
+.footer-sep { font-size: 11px; color: var(--text-muted); opacity: 0.4; }
 
 /* NAV */
 nav {
@@ -3523,8 +3530,16 @@ nav {
 </section>
 
 <footer>
-  <div class="footer-text">© 2025 Dr. Muhammad Farooq · AI in Healthcare</div>
-  <div class="footer-text">Built with precision · Privacy-First AI Advocate</div>
+  <div class="footer-text">© 2026 Dr. Muhammad Farooq · AI in Healthcare</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/dr-muhammadfarooq/" target="_blank" class="footer-link">LinkedIn</a>
+    <span class="footer-sep">·</span>
+    <a href="https://github.com/DrFarooqAi" target="_blank" class="footer-link">GitHub</a>
+    <span class="footer-sep">·</span>
+    <a href="https://drfarooqai.github.io/articles/" target="_blank" class="footer-link">Articles</a>
+    <span class="footer-sep">·</span>
+    <a href="mailto:farooqntn@yahoo.com" class="footer-link">Email</a>
+  </div>
 </footer>
 
 <script>
