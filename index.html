@@ -188,6 +188,33 @@ body::after {
   100% { background-position: 300% 50%; }
 }
 
+.hero-creds {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(14px, 1.5vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 10px 0 18px;
+  line-height: 1.5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+.hero-creds .cred {
+  background: linear-gradient(90deg, #22d3ee, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  white-space: nowrap;
+}
+.hero-creds .sep {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(167,139,250,0.6);
+  display: inline-block;
+}
+
 .hero-title {
   font-family: 'Space Mono', monospace;
   font-size: 12px;
@@ -2723,7 +2750,15 @@ nav {
       <div class="line1">Dr. Muhammad</div>
       <div class="line2">Farooq</div>
     </div>
-    
+
+    <div class="hero-creds">
+      <span class="cred">MSc Artificial Intelligence (Germany)</span>
+      <span class="sep"></span>
+      <span class="cred">MBBS</span>
+      <span class="sep"></span>
+      <span class="cred">CPHQ</span>
+    </div>
+
     <div class="hero-title">
       AI in Healthcare · AI Doctor Brand<br>
       Medical Doctor · AI Builder · Researcher · Personalized AI
